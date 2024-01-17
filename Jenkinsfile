@@ -1,14 +1,18 @@
 pipeline {
     agent any
+    environment {
+        MAVEN_HOME = tool 'Maven'
+        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
+    }
     stages {
         stage('Build') {
             steps {
-                sh "/opt/apache-maven/bin/mvn clean package"
+                sh "mvn clean package"
             }
         }
         stage('Test') {
             steps {
-                sh "/opt/apache-maven/bin/mvn test"
+                sh "mvn test"
             }
         }
     }
