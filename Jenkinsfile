@@ -19,10 +19,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    def scannerHome = tool 'Sonar'
-                       withSonarQubeEnv('http://localhost:9000') {
-                          sh "${SCANNER_HOME}/bin/sonar-scanner"
-                       }
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=test-sonar-1 -Dsonar.projectName='test-sonar-1' -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_f7335e86463c183ee27e15edf031c4d5d061985a"
                 }
             }
         }
