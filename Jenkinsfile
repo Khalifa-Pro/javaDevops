@@ -4,6 +4,7 @@ pipeline {
         MAVEN_HOME = tool 'Maven'
         PATH = "${MAVEN_HOME}/bin:${env.PATH}"
         SCANNER_HOME = tool 'Sonar'
+        SONAR_URL = 'http://localhost:9000'
     }
     stages {
         stage('Build') {
