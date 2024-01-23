@@ -4,7 +4,7 @@ pipeline {
         MAVEN_HOME = tool 'Maven'
         PATH = "${MAVEN_HOME}/bin:${env.PATH}"
         SCANNER_HOME = tool 'Sonar'
-        "${SONARQUBE_HOME}/bin:${env.PATH}"
+        PATH = "${SONARQUBE_HOME}/bin:${env.PATH}"
     }
     stages {
         stage('Build') {
