@@ -12,17 +12,27 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <!-- Propriétés spécifiques à SonarQube -->
-        <sonar.host.url>http://localhost:9000</sonar.host.url>
-        <!-- Ajoutez le jeton d'authentification si nécessaire -->
-        <!-- <sonar.login>your-sonar-login-token</sonar.login> -->
     </properties>
 
     <dependencies>
-        <!-- Dépendances... -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.sonarqube</groupId>
+            <artifactId>sonar-plugin-api</artifactId>
+            <version>9.3.0.51899</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.7.0.1746</version>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
