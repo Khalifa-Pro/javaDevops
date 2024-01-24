@@ -36,17 +36,17 @@ pipeline {
                         nexusArtifactUploader(
                             nexusVersion: 'nexus3',
                             protocol: 'http',
-                            nexusUrl: 'http://localhost:8081',
-                            groupId: pom.groupId,
-                            version: pom.version,
+                            nexusUrl: 'http://172.17.0.4:8081',
+                            groupId: 'pom.sn.isi.test',
+                            version: 'pom.1.0-SNAPSHOT',
                             repository: 'maven-central-repo',
                             credentialsId: 'NEXUS_CRED',
                             artifacts: [
-                                [artifactId: pom.artifactId,
+                                [artifactId: 'pom.projectDevops',
                                 classifier: '',
                                 file: artifactPath,
                                 type: pom.packaging],
-                                [artifactId: pom.artifactId,
+                                [artifactId: 'pom.projectDevops',
                                 classifier: '',
                                 file: "pom.xml",
                                 type: "pom"]
