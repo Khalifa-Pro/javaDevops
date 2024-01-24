@@ -27,13 +27,13 @@ pipeline {
                            if(artifactExists) {
                                echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
                                nexusArtifactUploader(
-                                   nexusVersion: nexus3,
-                                   protocol: http,
-                                   nexusUrl: localhost:8081/,
-                                   groupId: pom.sn.isi.test,
-                                   version: pom.1.0-SNAPSHOT,
-                                   repository: maven-central-repo,
-                                   credentialsId: NEXUS_CRED,
+                                   nexusVersion: 'nexus3',
+                                   protocol: 'http',
+                                   nexusUrl: 'localhost:8081',
+                                   groupId: 'pom.sn.isi.test',
+                                   version: 'pom.1.0-SNAPSHOT',
+                                   repository: 'maven-central-repo',
+                                   credentialsId: 'NEXUS_CRED',
                                    artifacts: [
                                        [artifactId: pom.projectDevops,
                                        classifier: '',
