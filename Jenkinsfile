@@ -34,7 +34,7 @@ pipeline {
                 ]],
                 credentialsId: 'NEXUS_CRED',
                 groupId: 'sn.isi.test',
-                nexusUrl: '127.0.0.1',
+                nexusUrl: '127.0.0.1:8081',
                 nexusVersion: 'nexus2',
                 protocol: 'http',
                 repository: 'http://127.0.0.1:8081/repository/maven-central-repo/',
