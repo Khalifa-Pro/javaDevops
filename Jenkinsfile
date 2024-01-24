@@ -23,39 +23,22 @@ pipeline {
                 }
             }
         }
-        stage('Publish to Nexus Repository Manager') {
+        stage('Upload artefact project to Nexus Repository Manager') {
             steps {
-                script {
-                    def pom = readMavenPom file: "pom.xml"
-                    def filesByGlob = findFiles(glob: "target/*.${pom.packaging}")
-
-                    if (filesByGlob.size() > 0) {
-                        def artifactPath = filesByGlob[0].path
-                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}"
-
-                        nexusArtifactUploader(
-                            nexusVersion: 'nexus3',
-                            protocol: 'http',
-                            nexusUrl: '172.17.0.4:8081',
-                            groupId: 'pom.sn.isi.test',
-                            version: 'pom.1.0-SNAPSHOT',
-                            repository: 'maven-central-repo',
-                            credentialsId: 'NEXUS_CRED',
-                            artifacts: [
-                                [artifactId: 'pom.projectDevops',
-                                classifier: '',
-                                file: artifactPath,
-                                type: pom.packaging],
-                                [artifactId: 'pom.projectDevops',
-                                classifier: '',
-                                file: "pom.xml",
-                                type: "pom"]
-                            ]
-                        )
-                    } else {
-                        error "*** No artifact found in target directory"
-                    }
-                }
+                nexusArtifactUploader artifacts: [
+                [
+                    artifactId: 'projectDevops',
+                    classifier: '',
+                    file: 'target/projectDevops-1.0-SNAPSHOT.jar',
+                    type: 'jar'
+                ]],
+                credentialsId: 'NEXUS_CRED',
+                groupId: 'sn.isi.test',
+                nexusUrl: '172.17.0.4',
+                nexusVersion: 'nexus2',
+                protocol: 'http',
+                repository: 'http://localhost:8081/repository/maven-central-repo/',
+                version: '1.0-SNAPSHOT'
             }
         }
     }
