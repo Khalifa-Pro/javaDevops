@@ -23,26 +23,31 @@ pipeline {
         stage('Publish to Nexus Repository Manager') {
             steps {
                 script {
-                    def pom = readMavenPom file: "pom.xml"
+                    def groupId = sh(script: 'mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout', returnStdout: true).trim()
+                    def artifactId = sh(script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true).trim()
+                    def version = sh(script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true).trim()
+
+                    echo "GroupId: ${groupId}, ArtifactId: ${artifactId}, Version: ${version}"
+
                     def filesByGlob = findFiles(glob: "target/*.${pom.packaging}")
                     if (filesByGlob.size() > 0) {
                         def artifactPath = filesByGlob[0].path
-                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}"
+                        echo "*** File: ${artifactPath}, group: ${groupId}, packaging: ${pom.packaging}, version ${version}"
 
                         nexusArtifactUploader(
                             nexusVersion: 'nexus3',
                             protocol: 'http',
                             nexusUrl: 'http://localhost:8081',
-                            groupId: 'pom.sn.isi.test',
-                            version: '1.0-SNAPSHOT',  // Utilisez la variable pom.version ici si nécessaire
+                            groupId: groupId,
+                            version: version,
                             repository: 'maven-central-repo',
                             credentialsId: 'NEXUS_CRED',
                             artifacts: [
-                                [artifactId: pom.artifactId,
+                                [artifactId: artifactId,
                                 classifier: '',
                                 file: artifactPath,
                                 type: pom.packaging],
-                                [artifactId: pom.artifactId,
+                                [artifactId: artifactId,
                                 classifier: '',
                                 file: "pom.xml",
                                 type: "pom"]
