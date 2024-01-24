@@ -19,7 +19,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=test-sonar-2 -Dsonar.projectName='test-sonar-2' -Dsonar.host.url=http://172.17.0.3:9000 -Dsonar.token=sqp_24709487bff13bed91f51ebebece339e89038e54"
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=test-sonar-3 -Dsonar.projectName='test-sonar-3' -Dsonar.host.url=http://172.17.0.3:9000 -Dsonar.token=sqp_035db7fd7c970fd1991511f1a1c550952833cbae"
                 }
             }
         }
