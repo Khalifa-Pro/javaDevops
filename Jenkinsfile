@@ -36,7 +36,7 @@ pipeline {
                         nexusArtifactUploader(
                             nexusVersion: 'nexus3',
                             protocol: 'http',
-                            nexusUrl: 'http://172.17.0.4:8081',
+                            nexusUrl: '172.17.0.4:8081',
                             groupId: 'pom.sn.isi.test',
                             version: 'pom.1.0-SNAPSHOT',
                             repository: 'maven-central-repo',
