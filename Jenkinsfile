@@ -29,25 +29,25 @@ pipeline {
 
                     echo "GroupId: ${groupId}, ArtifactId: ${artifactId}, Version: ${version}"
 
-                    def filesByGlob = findFiles(glob: "target/*.${pom.packaging}")
+                    def filesByGlob = findFiles(glob: "target/*.jar")  // Correction ici pour prendre en compte les fichiers JAR
                     if (filesByGlob.size() > 0) {
                         def artifactPath = filesByGlob[0].path
-                        echo "*** File: ${artifactPath}, group: ${groupId}, packaging: ${pom.packaging}, version ${version}"
+                        echo "*** File: ${artifactPath}, group: ${groupId}, packaging: jar, version ${version}"
 
                         nexusArtifactUploader(
                             nexusVersion: 'nexus3',
                             protocol: 'http',
                             nexusUrl: 'http://localhost:8081',
-                            groupId: groupId,
-                            version: version,
+                            groupId: 'sn.isi.test',
+                            version: '1.0-SNAPSHOT',
                             repository: 'maven-central-repo',
                             credentialsId: 'NEXUS_CRED',
                             artifacts: [
-                                [artifactId: artifactId,
+                                [artifactId: projectDevops,
                                 classifier: '',
                                 file: artifactPath,
-                                type: pom.packaging],
-                                [artifactId: artifactId,
+                                type: 'jar'],  // Correction ici pour spécifier le type comme 'jar'
+                                [artifactId: projectDevops,
                                 classifier: '',
                                 file: "pom.xml",
                                 type: "pom"]
