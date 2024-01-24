@@ -19,7 +19,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=test-sonar-2 -Dsonar.projectName='test-sonar-2' -Dsonar.host.url=http://172.17.0.2:9000 -Dsonar.token=sqp_24709487bff13bed91f51ebebece339e89038e54"
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=test-sonar-2 -Dsonar.projectName='test-sonar-2' -Dsonar.host.url=http://172.17.0.3:9000 -Dsonar.token=sqp_24709487bff13bed91f51ebebece339e89038e54"
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
                 ]],
                 credentialsId: 'NEXUS_CRED',
                 groupId: 'sn.isi.test',
-                nexusUrl: '172.17.0.4',
+                nexusUrl: '172.17.0.2',
                 nexusVersion: 'nexus2',
                 protocol: 'http',
                 repository: 'http://localhost:8081/repository/maven-central-repo/',
